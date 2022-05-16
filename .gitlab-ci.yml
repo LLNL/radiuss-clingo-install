@@ -31,8 +31,14 @@ stages:
 .on-quartz:
   tags: [shell, quartz]
 
+.on-ruby:
+  tags: [shell, ruby]
+
 .on-lassen:
   tags: [shell, lassen]
+
+.on-corona:
+  tags: [shell, corona]
 
 include:
   - local: .gitlab/generate.yml
