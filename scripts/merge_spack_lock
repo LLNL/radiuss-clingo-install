@@ -1,5 +1,12 @@
 #! /bin/bash
 
+##############################################################################
+# Copyright (c) 2022, Lawrence Livermore National Security, LLC and
+# RADIUSS project contributors. See the COPYRIGHT file for details.
+#
+# SPDX-License-Identifier: (MIT)
+##############################################################################
+
 # 3 elements in spack.lock environment description:
 # - "_meta" is typically the same among environments, we take the one in the first file.
 # - "roots" is a table of the root specs. It needs to be merged as a table.

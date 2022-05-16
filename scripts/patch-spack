@@ -1,5 +1,12 @@
 #!/bin/bash
 
+##############################################################################
+# Copyright (c) 2022, Lawrence Livermore National Security, LLC and
+# RADIUSS project contributors. See the COPYRIGHT file for details.
+#
+# SPDX-License-Identifier: (MIT)
+##############################################################################
+
 if [[ ! -d ${SPACK_PATH} ]]
 then
   cd ${SPACK_PATH}
