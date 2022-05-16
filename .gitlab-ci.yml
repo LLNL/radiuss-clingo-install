@@ -10,7 +10,7 @@ variables:
   SPACK_PATH: ${CI_BUILDS_DIR}/spack
   #[--create-unique-path]
   SPACK_DEBUG: "-d"
-  ENV_NAME: "blt-test"
+  CONFIG_NAME: "umpire"
 
 # We only do one generation per stage because we found conflicts otherwise
 #[one-generate-per-stage--]
