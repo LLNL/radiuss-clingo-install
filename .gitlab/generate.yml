@@ -39,19 +39,19 @@ quartz:
   extends: [.build-job, .on-quartz, .config-defined]
   stage: build_quartz_default
 
-quartz-gcc_8.3.1:
+quartz-gcc-8.3.1:
   extends: [.build-job, .on-quartz, .config-defined]
   before_script:
     - module load gcc/8.3.1
-  stage: build_quartz_gcc_8_2_1
+  stage: build_quartz_gcc_8_3_1
 
-quartz-gcc_10.2.1:
+quartz-gcc-10.2.1:
   extends: [.build-job, .on-quartz, .config-defined]
   before_script:
     - module load gcc/10.2.1
   stage: build_quartz_gcc_10_2_1
 
-quartz-python_3_8_2:
+quartz-python-3.8.2:
   extends: [.build-job, .on-quartz, .config-defined]
   before_script:
     - module load python/3.8.2
