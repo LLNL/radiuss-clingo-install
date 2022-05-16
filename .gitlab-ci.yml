@@ -18,13 +18,13 @@ stages:
   - setup
   - build_quartz_default
   - build_quartz_gcc_8_3_1
-  - build_quantz_gcc_10_2_1
+  - build_quartz_gcc_10_2_1
   - build_quartz_python_3_8_2
     #  - build_quartz_gcc_8_3_1_python_3_8_2
     #  - build_quantz_gcc_10_2_1_python_3_8_2
   - build_ruby_default
-  - build_corona_default
   - build_lassen_default
+  - build_corona_default
   - clean
 #[--one-generate-per-stage]
 
