@@ -1,0 +1,38 @@
+##############################################################################
+# Copyright (c) 2019-2021, Lawrence Livermore National Security, LLC and
+# RADIUSS project contributors. See the COPYRIGHT file for details.
+#
+# SPDX-License-Identifier: (MIT)
+##############################################################################
+
+  #[create-unique-path--]
+variables:
+  SPACK_PATH: ${CI_BUILDS_DIR}/spack
+  #[--create-unique-path]
+  SPACK_DEBUG: "-d"
+  ENV_NAME: "blt-test"
+
+# We only do one generation per stage because we found conflicts otherwise
+#[one-generate-per-stage--]
+stages:
+  - setup
+  - build_quartz_default
+  - build_quartz_gcc_8_3_1
+  - build_quantz_gcc_10_2_1
+  - build_quartz_python_3_8_2
+    #  - build_quartz_gcc_8_3_1_python_3_8_2
+    #  - build_quantz_gcc_10_2_1_python_3_8_2
+  - build_ruby_default
+  - build_corona_default
+  - build_lassen_default
+  - clean
+#[--one-generate-per-stage]
+
+.on-quartz:
+  tags: [shell, quartz]
+
+.on-lassen:
+  tags: [shell, lassen]
+
+include:
+  - local: .gitlab/generate.yml
