@@ -5,44 +5,22 @@
 # SPDX-License-Identifier: (MIT)
 ##############################################################################
 
-  #[create-unique-path--]
 variables:
   SPACK_PATH: ${CI_BUILDS_DIR}/spack
-  #[--create-unique-path]
   SPACK_DEBUG: "-d"
   CONFIG_NAME: "umpire"
 
 # We only do one generation per stage because we found conflicts otherwise
-#[one-generate-per-stage--]
 stages:
   - setup
-  - build_quartz_default
-  - build_quartz_gcc_8_3_1
-  - build_quartz_gcc_10_2_1
-  - build_quartz_python_3_8_2
-    #  - build_quartz_gcc_8_3_1_python_3_8_2
-    #  - build_quantz_gcc_10_2_1_python_3_8_2
-  - build_ruby_default
-  - build_lassen_default
-  - build_corona_default
-  - clean
-#[--one-generate-per-stage]
+  - quartz
+  - ruby
+  - lassen
+  - corona
 
-.on-quartz:
-  tags: [shell, quartz]
-
-.on-ruby:
-  tags: [shell, ruby]
-
-.on-lassen:
-  tags: [shell, lassen]
-
-.on-corona:
-  tags: [shell, corona]
-
-# Run a simple jobs to display instructions when no config name was specified.
+# Run a simple job to display instructions when no config name was specified.
 no-config-name:
-  extends: [.on-quartz]
+  tags: [shell, quartz]
   rules:
     - if: '$CONFIG_NAME == ""'
       when: always
@@ -53,67 +31,51 @@ no-config-name:
     - echo "\"CONFIG_NAME\" is required and should point to a config directory."
     - exit 1
 
-.config-defined:
+# Trigger sub-pipelines:
+quartz:
+  stage: quartz
+  trigger:
+    include: .gitlab/quartz.yml
+    strategy: depend
+    forward:
+      pipeline_variables: true
   rules:
     - if: '$CONFIG_NAME == ""'
       when: never
-    # We ignore failure and run all the tests all the time.
-    - when: always
+    - when: on_success
 
-.build-job-slurm:
-  script:
-    - mv ~/.spack ~/._spack_saved
-    - scripts/get-spack
-    - . ${SPACK_PATH}/share/spack/setup-env.sh
-    - srun -N 1 -p pdebug spack -d spec zlib
-  after_script:
-    - rm -rf ~/.spack
-    - mv ~/._spack_saved ~/.spack
-
-.build-job-lsf:
-  script:
-    - mv ~/.spack ~/._spack_saved
-    - scripts/get-spack
-    - . ${SPACK_PATH}/share/spack/setup-env.sh
-    - lalloc 1 spack -d spec zlib
-  after_script:
-    - rm -rf ~/.spack
-    - mv ~/._spack_saved ~/.spack
-
-## quartz
-quartz:
-  extends: [.build-job-slurm, .on-quartz, .config-defined]
-  stage: build_quartz_default
-
-quartz-gcc-8.3.1:
-  extends: [.build-job-slurm, .on-quartz, .config-defined]
-  before_script:
-    - module load gcc/8.3.1
-  stage: build_quartz_gcc_8_3_1
-
-quartz-gcc-10.2.1:
-  extends: [.build-job-slurm, .on-quartz, .config-defined]
-  before_script:
-    - module load gcc/10.2.1
-  stage: build_quartz_gcc_10_2_1
-
-quartz-python-3.8.2:
-  extends: [.build-job-slurm, .on-quartz, .config-defined]
-  before_script:
-    - module load python/3.8.2
-  stage: build_quartz_python_3_8_2
-
-## ruby
 ruby:
-  extends: [.build-job-slurm, .on-ruby, .config-defined]
-  stage: build_ruby_default
+  stage: ruby
+  trigger:
+    include: .gitlab/ruby.yml
+    strategy: depend
+    forward:
+      pipeline_variables: true
+  rules:
+    - if: '$CONFIG_NAME == ""'
+      when: never
+    - when: on_success
 
-## lassen
 lassen:
-  extends: [.build-job-lsf, .on-lassen, .config-defined]
-  stage: build_lassen_default
+  stage: lassen
+  trigger:
+    include: .gitlab/lassen.yml
+    strategy: depend
+    forward:
+      pipeline_variables: true
+  rules:
+    - if: '$CONFIG_NAME == ""'
+      when: never
+    - when: on_success
 
-## corona
 corona:
-  extends: [.build-job-slurm, .on-corona, .config-defined]
-  stage: build_corona_default
+  stage: corona
+  trigger:
+    include: .gitlab/corona.yml
+    strategy: depend
+    forward:
+      pipeline_variables: true
+  rules:
+    - if: '$CONFIG_NAME == ""'
+      when: never
+    - when: on_success

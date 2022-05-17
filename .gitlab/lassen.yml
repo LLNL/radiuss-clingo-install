@@ -1,0 +1,56 @@
+##############################################################################
+# Copyright (c) 2022, Lawrence Livermore National Security, LLC and
+# RADIUSS project contributors. See the COPYRIGHT file for details.
+#
+# SPDX-License-Identifier: (MIT)
+##############################################################################
+
+stages:
+  - default
+  - gcc_8_3_1
+  - clang_12_0_1
+  - python_3_8_2
+  - python_3_8_2_gcc_8_3_1
+  - python_3_8_2_clang_12_0_1
+
+.on-lassen:
+  tags: [shell, lassen]
+
+lassen:
+  extends: [.build-job-lsf, .on-lassen]
+  stage: default
+
+lassen-gcc-8.3.1:
+  extends: [.build-job-lsf, .on-lassen]
+  before_script:
+    - module load gcc/8.3.1
+  stage: gcc_8_3_1
+
+lassen-clang-12.0.1:
+  extends: [.build-job-lsf, .on-lassen]
+  before_script:
+    - module load clang/12.0.1-gcc-8.3.1
+  stage: clang_12_0_1
+
+lassen-python-3.8.2:
+  extends: [.build-job-lsf, .on-lassen]
+  before_script:
+    - module load python/3.8.2
+  stage: python_3_8_2
+
+lassen-python-3.8.2-gcc-8.3.1:
+  extends: [.build-job-lsf, .on-lassen]
+  before_script:
+    - module load python/3.8.2
+    - module load gcc/8.3.1
+  stage: python_3_8_2_gcc_8_3_1
+
+lassen-python-3.8.2-clang-12.0.1:
+  extends: [.build-job-lsf, .on-lassen]
+  before_script:
+    - module load python/3.8.2
+    - module load clang/12.0.1-gcc-8.3.1
+  stage: python_3_8_2_clang_12_0_1
+
+include:
+  - local: .gitlab/configs/common.yml

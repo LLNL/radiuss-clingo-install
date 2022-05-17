@@ -1,0 +1,26 @@
+##############################################################################
+# Copyright (c) 2022, Lawrence Livermore National Security, LLC and
+# RADIUSS project contributors. See the COPYRIGHT file for details.
+#
+# SPDX-License-Identifier: (MIT)
+##############################################################################
+
+stages:
+  - default
+  - gcc_tce_8_3_1
+
+.on-corona:
+  tags: [shell, corona]
+
+corona:
+  extends: [.build-job-slurm, .on-corona]
+  stage: default
+
+corona-gcc-tce-8.3.1:
+  extends: [.build-job-slurm, .on-corona]
+  before_script:
+    - module load gcc-tce/8.3.1
+  stage: gcc_tce_8_3_1
+
+include:
+  - local: .gitlab/configs/common.yml
