@@ -11,6 +11,7 @@
     - when: always
   script:
     - mv ~/.spack ~/._spack_saved
+    - SPACK_PATH=${SPACK_PATH:-"./spack"}
     - scripts/get-spack
     - . ${SPACK_PATH}/share/spack/setup-env.sh
     - srun -N 1 -p pdebug spack -d spec zlib
@@ -25,6 +26,7 @@
     - when: always
   script:
     - mv ~/.spack ~/._spack_saved
+    - SPACK_PATH=${SPACK_PATH:-"./spack"}
     - scripts/get-spack
     - . ${SPACK_PATH}/share/spack/setup-env.sh
     - lalloc 1 spack -d spec zlib
