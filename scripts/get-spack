@@ -11,17 +11,19 @@ set -e
 
 . configs/${CONFIG_NAME}/ci-variables.bash
 
+spack_path=${SPACK_PATH:-"./spack"}
+
 #[get-spack--]
-if [[ ! -d ${SPACK_PATH} ]]
+if [[ ! -d ${spack_path} ]]
 then
-  mkdir -p ${SPACK_PATH}/..
+  mkdir -p ${spack_path}/..
   # A shallow clone is enough, and much faster.
-  git clone ${SPACK_REPO} --depth 1 --branch develop ${SPACK_PATH}
+  git clone ${SPACK_REPO} --depth 1 --branch develop ${spack_path}
 fi
 
 if [[ ${SPACK_COMMIT} ]]
 then
-  cd ${SPACK_PATH}
+  cd ${spack_path}
   git checkout -b temp
   git branch -D ${SPACK_REF}
   git fetch --depth 1 ${SPACK_REPO} ${SPACK_REF}:${SPACK_REF}
@@ -30,7 +32,7 @@ then
   git branch -D temp
   cd -
 else
-  cd ${SPACK_PATH}
+  cd ${spack_path}
   git fetch --depth 1 ${SPACK_REPO} ${SPACK_REF}
   git checkout ${SPACK_REF}
   git tag ${CI_PIPELINE_ID}

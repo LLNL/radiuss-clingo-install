@@ -6,7 +6,6 @@
 ##############################################################################
 
 variables:
-  SPACK_PATH: ${CI_BUILDS_DIR}/spack
   SPACK_DEBUG: "-d"
   CONFIG_NAME: "umpire"
 
@@ -42,7 +41,7 @@ quartz:
   rules:
     - if: '$CONFIG_NAME == ""'
       when: never
-    - when: on_success
+    - when: always
 
 ruby:
   stage: ruby
@@ -54,7 +53,7 @@ ruby:
   rules:
     - if: '$CONFIG_NAME == ""'
       when: never
-    - when: on_success
+    - when: always
 
 lassen:
   stage: lassen
@@ -66,7 +65,7 @@ lassen:
   rules:
     - if: '$CONFIG_NAME == ""'
       when: never
-    - when: on_success
+    - when: always
 
 corona:
   stage: corona
@@ -78,4 +77,4 @@ corona:
   rules:
     - if: '$CONFIG_NAME == ""'
       when: never
-    - when: on_success
+    - when: always
