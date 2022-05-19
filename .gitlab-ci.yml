@@ -1,38 +1,80 @@
 ##############################################################################
-# Copyright (c) 2019-2021, Lawrence Livermore National Security, LLC and
+# Copyright (c) 2022, Lawrence Livermore National Security, LLC and
 # RADIUSS project contributors. See the COPYRIGHT file for details.
 #
 # SPDX-License-Identifier: (MIT)
 ##############################################################################
 
-  #[create-unique-path--]
 variables:
-  SPACK_PATH: ${CI_BUILDS_DIR}/spack
-  #[--create-unique-path]
   SPACK_DEBUG: "-d"
-  ENV_NAME: "blt-test"
+  CONFIG_NAME: "umpire"
 
 # We only do one generation per stage because we found conflicts otherwise
-#[one-generate-per-stage--]
 stages:
   - setup
-  - build_quartz_default
-  - build_quartz_gcc_8_3_1
-  - build_quantz_gcc_10_2_1
-  - build_quartz_python_3_8_2
-    #  - build_quartz_gcc_8_3_1_python_3_8_2
-    #  - build_quantz_gcc_10_2_1_python_3_8_2
-  - build_ruby_default
-  - build_corona_default
-  - build_lassen_default
-  - clean
-#[--one-generate-per-stage]
+  - quartz
+  - ruby
+  - lassen
+  - corona
 
-.on-quartz:
+# Run a simple job to display instructions when no config name was specified.
+no-config-name:
   tags: [shell, quartz]
+  rules:
+    - if: '$CONFIG_NAME == ""'
+      when: always
+    - when: never
+  stage: setup
+  script:
+    - echo "Variable \"CONFIG_NAME\" was not set."
+    - echo "\"CONFIG_NAME\" is required and should point to a config directory."
+    - exit 1
 
-.on-lassen:
-  tags: [shell, lassen]
+# Trigger sub-pipelines:
+quartz:
+  stage: quartz
+  trigger:
+    include: .gitlab/quartz.yml
+    strategy: depend
+    forward:
+      pipeline_variables: true
+  rules:
+    - if: '$CONFIG_NAME == ""'
+      when: never
+    - when: always
 
-include:
-  - local: .gitlab/generate.yml
+ruby:
+  stage: ruby
+  trigger:
+    include: .gitlab/ruby.yml
+    strategy: depend
+    forward:
+      pipeline_variables: true
+  rules:
+    - if: '$CONFIG_NAME == ""'
+      when: never
+    - when: always
+
+lassen:
+  stage: lassen
+  trigger:
+    include: .gitlab/lassen.yml
+    strategy: depend
+    forward:
+      pipeline_variables: true
+  rules:
+    - if: '$CONFIG_NAME == ""'
+      when: never
+    - when: always
+
+corona:
+  stage: corona
+  trigger:
+    include: .gitlab/corona.yml
+    strategy: depend
+    forward:
+      pipeline_variables: true
+  rules:
+    - if: '$CONFIG_NAME == ""'
+      when: never
+    - when: always

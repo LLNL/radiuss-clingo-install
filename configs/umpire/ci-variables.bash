@@ -1,5 +1,3 @@
-#!/bin/bash
-
 ##############################################################################
 # Copyright (c) 2022, Lawrence Livermore National Security, LLC and
 # RADIUSS project contributors. See the COPYRIGHT file for details.
@@ -7,14 +5,5 @@
 # SPDX-License-Identifier: (MIT)
 ##############################################################################
 
-if [[ ! -d ${SPACK_PATH} ]]
-then
-  cd ${SPACK_PATH}
-  git apply ${CI_PROJECT_DIR}/patches/spack/user-scope.patch
-  git commit -am "Moving user scope in spack directory"
-  cd -
-else
-  echo "\$SPACK_PATH = $SPACK_PATH is not a directory,"
-  echo "be sure to run get-spack first."
-  exit 1
-fi
+export SPACK_REPO=https://github.com/spack/spack.git
+export SPACK_REF=c2af154cd24ab3ef501a7efc020f818ef60aa552
