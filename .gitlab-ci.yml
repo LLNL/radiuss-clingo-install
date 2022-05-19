@@ -21,14 +21,13 @@ variables:
 # We only do one generation per stage because we found conflicts otherwise
 stages:
   - setup
-  - quartz
   - ruby
   - lassen
   - corona
 
 # Run a simple job to display instructions when no config name was specified.
 no-config-name:
-  tags: [shell, quartz]
+  tags: [shell, ruby]
   rules:
     - if: '$CONFIG_NAME == ""'
       when: always
@@ -40,7 +39,7 @@ no-config-name:
     - exit 1
 
 clean-bootstrap:
-  tags: [shell, quartz]
+  tags: [shell, ruby]
   rules:
     - if: '$CONFIG_NAME == ""'
       when: never
@@ -54,18 +53,6 @@ clean-bootstrap:
     - spack clean -b
 
 # Trigger sub-pipelines:
-quartz:
-  stage: quartz
-  trigger:
-    include: .gitlab/quartz.yml
-    strategy: depend
-    forward:
-      pipeline_variables: true
-  rules:
-    - if: '$CONFIG_NAME == ""'
-      when: never
-    - when: always
-
 ruby:
   stage: ruby
   trigger:
