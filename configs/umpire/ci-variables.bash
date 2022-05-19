@@ -6,4 +6,4 @@
 ##############################################################################
 
 export SPACK_REPO=https://github.com/spack/spack.git
-export SPACK_REF=97792f04e9846f864d3d088a1209735c1800e4ff
+export SPACK_REF=c2af154cd24ab3ef501a7efc020f818ef60aa552
