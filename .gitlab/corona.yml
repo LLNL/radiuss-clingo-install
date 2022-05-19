@@ -7,20 +7,13 @@
 
 stages:
   - default
-  - gcc_tce_10_2_1
 
 .on-corona:
   tags: [shell, corona]
 
-corona:
+corona-default:
   extends: [.build-job-slurm, .on-corona]
   stage: default
-
-corona-gcc-tce-10.2.1:
-  extends: [.build-job-slurm, .on-corona]
-  before_script:
-    - module load gcc-tce/10.2.1
-  stage: gcc_tce_10_2_1
 
 include:
   - local: .gitlab/configs/common.yml
