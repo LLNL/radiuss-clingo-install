@@ -6,5 +6,10 @@
 ################################################################################
 
 if (SPHINX_FOUND)
-  add_subdirectory(sphinx)
+  blt_add_sphinx_target(radiuss_clingo_install_docs)
+endif ()
+
+if ( NOT SPHINX_FOUND)
+  message(WARNING "ENABLE_DOCS=On, but Sphinx or Doxygen not found. \
+    Documentation won't be built.")
 endif ()
