@@ -7,19 +7,20 @@
 
 variables:
   SPACK_DEBUG: "-d"
-  CONFIG_NAME: "umpire"
+
+include:
+  - local: .gitlab/configs/custom.yml
 
 # We only do one generation per stage because we found conflicts otherwise
 stages:
   - setup
-  - quartz
   - ruby
   - lassen
   - corona
 
 # Run a simple job to display instructions when no config name was specified.
 no-config-name:
-  tags: [shell, quartz]
+  tags: [shell, ruby]
   rules:
     - if: '$CONFIG_NAME == ""'
       when: always
@@ -30,19 +31,21 @@ no-config-name:
     - echo "\"CONFIG_NAME\" is required and should point to a config directory."
     - exit 1
 
-# Trigger sub-pipelines:
-quartz:
-  stage: quartz
-  trigger:
-    include: .gitlab/quartz.yml
-    strategy: depend
-    forward:
-      pipeline_variables: true
+clean-bootstrap:
+  tags: [shell, ruby]
   rules:
     - if: '$CONFIG_NAME == ""'
       when: never
     - when: always
+  stage: setup
+  script:
+    - SPACK_PATH=${SPACK_PATH:-"./spack"}
+    - scripts/get-spack
+    - . ${SPACK_PATH}/share/spack/setup-env.sh
+    # Clean bootstrap
+    - spack clean -b
 
+# Trigger sub-pipelines:
 ruby:
   stage: ruby
   trigger:
