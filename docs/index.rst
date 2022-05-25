@@ -42,6 +42,6 @@ frozen Spack version (for reproducibility / reliability).
 
 .. toctree::
    :hidden:
-   :caption: Developper Documentation
+   :caption: Developer Documentation
 
    sphinx/dev_guide/index
