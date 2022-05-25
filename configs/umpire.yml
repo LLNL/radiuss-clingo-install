@@ -18,3 +18,7 @@ variables:
 # We place spack in the umpire workspace to clone it only once.
 # WARNING: this is not an issue because the jobs run sequentially.
   SPACK_PATH: "/usr/workspace/umdev/spack"
+# Repository to clone spack from
+  SPACK_REPO: "https://github.com/spack/spack.git"
+# Ref (commit or branch) to checkout in spack
+  SPACK_REF: "c2af154cd24ab3ef501a7efc020f818ef60aa552"

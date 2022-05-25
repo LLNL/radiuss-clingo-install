@@ -10,7 +10,6 @@
     # We ignore failure and run all the tests all the time.
     - when: always
   script:
-    - SPACK_PATH=${SPACK_PATH:-"./spack"}
     - scripts/get-spack
     - . ${SPACK_PATH}/share/spack/setup-env.sh
     - srun -N 1 -p pdebug spack -d spec zlib
@@ -19,7 +18,6 @@
   rules:
     - when: always
   script:
-    - SPACK_PATH=${SPACK_PATH:-"./spack"}
     - scripts/get-spack
     - . ${SPACK_PATH}/share/spack/setup-env.sh
     - lalloc 1 spack -d spec zlib
