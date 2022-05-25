@@ -6,10 +6,11 @@
 ##############################################################################
 
 variables:
-  SPACK_DEBUG: "-d"
+  SPACK_PATH: "./spack"
+  CONFIG_NAME: ""
 
-include:
-  - local: .gitlab/configs/custom.yml
+#include:
+#  - local: configs/<your-config>.yml
 
 # We only do one generation per stage because we found conflicts otherwise
 stages:
@@ -22,7 +23,7 @@ stages:
 no-config-name:
   tags: [shell, ruby]
   rules:
-    - if: '$CONFIG_NAME == "demo"'
+    - if: '$CONFIG_NAME == ""'
       when: always
     - when: never
   stage: setup
@@ -33,7 +34,7 @@ no-config-name:
 clean-bootstrap:
   tags: [shell, ruby]
   rules:
-    - if: '$CONFIG_NAME == "demo"'
+    - if: '$CONFIG_NAME == ""'
       when: never
     - when: always
   stage: setup
@@ -53,7 +54,7 @@ ruby:
     forward:
       pipeline_variables: true
   rules:
-    - if: '$CONFIG_NAME == "demo"'
+    - if: '$CONFIG_NAME == ""'
       when: never
     - when: always
 
@@ -65,7 +66,7 @@ lassen:
     forward:
       pipeline_variables: true
   rules:
-    - if: '$CONFIG_NAME == "demo"'
+    - if: '$CONFIG_NAME == ""'
       when: never
     - when: always
 
@@ -77,6 +78,6 @@ corona:
     forward:
       pipeline_variables: true
   rules:
-    - if: '$CONFIG_NAME == "demo"'
+    - if: '$CONFIG_NAME == ""'
       when: never
     - when: always
