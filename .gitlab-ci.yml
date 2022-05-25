@@ -29,7 +29,6 @@ no-config-name:
   script:
     - echo "Variable \"CONFIG_NAME\" was not set."
     - echo "\"CONFIG_NAME\" is required and should point to a config directory."
-    - exit 1
 
 clean-bootstrap:
   tags: [shell, ruby]
