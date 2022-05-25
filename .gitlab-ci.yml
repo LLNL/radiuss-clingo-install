@@ -22,7 +22,7 @@ stages:
 no-config-name:
   tags: [shell, ruby]
   rules:
-    - if: '$CONFIG_NAME == ""'
+    - if: '$CONFIG_NAME == "demo"'
       when: always
     - when: never
   stage: setup
@@ -33,7 +33,7 @@ no-config-name:
 clean-bootstrap:
   tags: [shell, ruby]
   rules:
-    - if: '$CONFIG_NAME == ""'
+    - if: '$CONFIG_NAME == "demo"'
       when: never
     - when: always
   stage: setup
@@ -53,7 +53,7 @@ ruby:
     forward:
       pipeline_variables: true
   rules:
-    - if: '$CONFIG_NAME == ""'
+    - if: '$CONFIG_NAME == "demo"'
       when: never
     - when: always
 
@@ -65,7 +65,7 @@ lassen:
     forward:
       pipeline_variables: true
   rules:
-    - if: '$CONFIG_NAME == ""'
+    - if: '$CONFIG_NAME == "demo"'
       when: never
     - when: always
 
@@ -77,6 +77,6 @@ corona:
     forward:
       pipeline_variables: true
   rules:
-    - if: '$CONFIG_NAME == ""'
+    - if: '$CONFIG_NAME == "demo"'
       when: never
     - when: always
