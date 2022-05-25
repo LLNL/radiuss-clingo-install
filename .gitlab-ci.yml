@@ -22,19 +22,18 @@ stages:
 no-config-name:
   tags: [shell, ruby]
   rules:
-    - if: '$CONFIG_NAME == ""'
+    - if: '$CONFIG_NAME == "demo"'
       when: always
     - when: never
   stage: setup
   script:
     - echo "Variable \"CONFIG_NAME\" was not set."
     - echo "\"CONFIG_NAME\" is required and should point to a config directory."
-    - exit 1
 
 clean-bootstrap:
   tags: [shell, ruby]
   rules:
-    - if: '$CONFIG_NAME == ""'
+    - if: '$CONFIG_NAME == "demo"'
       when: never
     - when: always
   stage: setup
@@ -54,7 +53,7 @@ ruby:
     forward:
       pipeline_variables: true
   rules:
-    - if: '$CONFIG_NAME == ""'
+    - if: '$CONFIG_NAME == "demo"'
       when: never
     - when: always
 
@@ -66,7 +65,7 @@ lassen:
     forward:
       pipeline_variables: true
   rules:
-    - if: '$CONFIG_NAME == ""'
+    - if: '$CONFIG_NAME == "demo"'
       when: never
     - when: always
 
@@ -78,6 +77,6 @@ corona:
     forward:
       pipeline_variables: true
   rules:
-    - if: '$CONFIG_NAME == ""'
+    - if: '$CONFIG_NAME == "demo"'
       when: never
     - when: always
