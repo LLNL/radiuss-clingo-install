@@ -13,10 +13,10 @@ variables:
 include:
   - local: $CONFIG_FILE
     rules:
-      - if: '$CONFIG_FILE' != "default"
+      - if: '$CONFIG_FILE != "default"'
   - local: pipeline.yml
     rules:
-      - if: '$CONFIG_FILE' != "default"
+      - if: '$CONFIG_FILE != "default"'
 
 # We only do one generation per stage because we found conflicts otherwise
 stages:
