@@ -7,77 +7,30 @@
 
 variables:
   SPACK_PATH: "./spack"
-  CONFIG_NAME: ""
+  CONFIG_FILE: ""
 
-#include:
-#  - local: configs/<your-config>.yml
+# If a configuration file is given, the pipeline is included.
+include:
+  - local: $CONFIG_FILE
+  - local: pipeline.yml
+  rules:
+    - if: '$CONFIG_FILE == ""'
+      when: never
+    - when: always
 
 # We only do one generation per stage because we found conflicts otherwise
 stages:
   - setup
-  - ruby
-  - lassen
-  - corona
 
 # Run a simple job to display instructions when no config name was specified.
 no-config-name:
   tags: [shell, ruby]
   rules:
-    - if: '$CONFIG_NAME == ""'
+    - if: '$CONFIG_FILE == ""'
       when: always
     - when: never
   stage: setup
   script:
-    - echo "Variable \"CONFIG_NAME\" was not set."
-    - echo "\"CONFIG_NAME\" is required and should point to a config directory."
+    - echo "Variable \"CONFIG_FILE\" was not set."
+    - echo "\"CONFIG_FILE\" is required and should point to a config directory."
 
-clean-bootstrap:
-  tags: [shell, ruby]
-  rules:
-    - if: '$CONFIG_NAME == ""'
-      when: never
-    - when: always
-  stage: setup
-  script:
-    - SPACK_PATH=${SPACK_PATH:-"./spack"}
-    - scripts/get-spack
-    - . ${SPACK_PATH}/share/spack/setup-env.sh
-    # Clean bootstrap
-    - spack clean -b
-
-# Trigger sub-pipelines:
-ruby:
-  stage: ruby
-  trigger:
-    include: .gitlab/ruby.yml
-    strategy: depend
-    forward:
-      pipeline_variables: true
-  rules:
-    - if: '$CONFIG_NAME == ""'
-      when: never
-    - when: always
-
-lassen:
-  stage: lassen
-  trigger:
-    include: .gitlab/lassen.yml
-    strategy: depend
-    forward:
-      pipeline_variables: true
-  rules:
-    - if: '$CONFIG_NAME == ""'
-      when: never
-    - when: always
-
-corona:
-  stage: corona
-  trigger:
-    include: .gitlab/corona.yml
-    strategy: depend
-    forward:
-      pipeline_variables: true
-  rules:
-    - if: '$CONFIG_NAME == ""'
-      when: never
-    - when: always
