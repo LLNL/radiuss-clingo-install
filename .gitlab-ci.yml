@@ -12,11 +12,15 @@ variables:
 # If a configuration file is given, the pipeline is included.
 include:
   - local: $CONFIG_FILE
+    rules:
+      - if: '$CONFIG_FILE == ""'
+        when: never
+      - when: always
   - local: pipeline.yml
-  rules:
-    - if: '$CONFIG_FILE == ""'
-      when: never
-    - when: always
+    rules:
+      - if: '$CONFIG_FILE == ""'
+        when: never
+      - when: always
 
 # We only do one generation per stage because we found conflicts otherwise
 stages:
