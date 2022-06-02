@@ -7,7 +7,7 @@
 # SPDX-License-Identifier: (MIT)
 ##############################################################################
 
-vars="CI_CONFIG_FILE CI_SPACK_REF CI_SPACK_REPO CI_SPACK_PATH"
+vars="CI_CONFIG_FILE LLNL_SERVICE_USER CUSTOM_CI_BUILDS_DIR CI_SPACK_REF CI_SPACK_REPO CI_SPACK_PATH"
 
 echo "--------------------------------"
 echo "---- Variables of interest "
