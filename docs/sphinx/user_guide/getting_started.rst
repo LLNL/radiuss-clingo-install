@@ -40,7 +40,6 @@ should suffice:
   $ git remote add gitlab ssh://git@czgitlab.llnl.gov:7999/<group>/radiuss-clingo-install.git
   $ git push gitlab
 
-
 ==================================
 Create a branch in the GitHub repo
 ==================================
@@ -49,17 +48,20 @@ Requirements
 ============
 
 We welcome LLNL projects, in particular RADIUSS projects, to contribute their
-configuration directly to the GitHub repo. To do so, projects should:
+configuration directly to the GitHub repo. To do so, one should:
 
 * Request write access to the GitHub repo.
 * Submit a PR with their configuration.
 * Pass the test on GitLab side.
 
 .. note::
-   It is mandatory that `CONFIG_FILE` default to "" on the main branch. In
+   It is mandatory that `CONFIG_FILE` default to "none" on the main branch. In
    GitLab UI, it is then possible to trigger or schedule pipelines and define
-   `CONFIG_FILE` to the configuration desired.
+   `CONFIG_FILE` to the path of the desired configuration.
 
+.. note::
+   Only PRs originating from the GitHub repo can be mirrored on LC GitLab, no
+   PR from forks can be tested. Please request write access.
 
 =====================
 Project configuration
