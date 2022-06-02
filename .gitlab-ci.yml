@@ -7,16 +7,15 @@
 
 variables:
   SPACK_PATH: "./spack"
-  CONFIG_FILE: "none"
 
 # If a configuration file is given, the pipeline is included.
 include:
-  - local: $CONFIG_FILE
+  - local: $CI_CONFIG_FILE
     rules:
-      - if: $CONFIG_FILE != "none"
+      - if: $CI_CONFIG_FILE != "none"
   - local: pipeline.yml
     rules:
-      - if: $CONFIG_FILE != "none"
+      - if: $CI_CONFIG_FILE != "none"
 
 # We only do one generation per stage because we found conflicts otherwise
 stages:
@@ -26,7 +25,7 @@ stages:
 no-config-name:
   tags: [shell, ruby]
   rules:
-    - if: $CONFIG_FILE == "none"
+    - if: $CI_CONFIG_FILE == "none"
       when: always
     - when: never
   stage: setup
