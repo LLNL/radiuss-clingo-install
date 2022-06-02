@@ -10,27 +10,27 @@
 set -e
 
 #[get-spack--]
-if [[ ! -d ${SPACK_PATH} ]]
+if [[ ! -d ${CI_SPACK_PATH} ]]
 then
-  mkdir -p ${SPACK_PATH}/..
+  mkdir -p ${CI_SPACK_PATH}/..
   # A shallow clone is enough, and much faster.
-  git clone ${SPACK_REPO} --depth 1 --branch develop ${SPACK_PATH}
+  git clone ${CI_SPACK_REPO} --depth 1 --branch develop ${CI_SPACK_PATH}
 fi
 
-if [[ ${SPACK_COMMIT} ]]
+if [[ ${CI_SPACK_COMMIT} ]]
 then
-  cd ${SPACK_PATH}
+  cd ${CI_SPACK_PATH}
   git checkout -b temp
-  git branch -D ${SPACK_REF}
-  git fetch --depth 1 ${SPACK_REPO} ${SPACK_REF}:${SPACK_REF}
-  git checkout ${SPACK_REF}
+  git branch -D ${CI_SPACK_REF}
+  git fetch --depth 1 ${CI_SPACK_REPO} ${CI_SPACK_REF}:${CI_SPACK_REF}
+  git checkout ${CI_SPACK_REF}
   git tag ${CI_PIPELINE_ID}
   git branch -D temp
   cd -
 else
-  cd ${SPACK_PATH}
-  git fetch --depth 1 ${SPACK_REPO} ${SPACK_REF}
-  git checkout ${SPACK_REF}
+  cd ${CI_SPACK_PATH}
+  git fetch --depth 1 ${CI_SPACK_REPO} ${CI_SPACK_REF}
+  git checkout ${CI_SPACK_REF}
   git tag ${CI_PIPELINE_ID}
   cd -
 fi

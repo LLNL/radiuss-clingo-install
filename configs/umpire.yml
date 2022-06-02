@@ -5,10 +5,7 @@
 # SPDX-License-Identifier: (MIT)
 ##############################################################################
 
-# Usage: uncomment and replace "demo" with what is appropriate.
-
 variables:
-  CONFIG_NAME: "umpire"
 # Use the umdev LLNL service user to run CI. This prevents from running
 # pipelines as an actual user.
   LLNL_SERVICE_USER: "umdev"
@@ -17,8 +14,8 @@ variables:
   CUSTOM_CI_BUILDS_DIR: "/usr/workspace/umdev/gitlab-runner"
 # We place spack in the umpire workspace to clone it only once.
 # WARNING: this is not an issue because the jobs run sequentially.
-  SPACK_PATH: "/usr/workspace/umdev/spack"
+  CI_SPACK_PATH: "/usr/workspace/umdev/spack"
 # Repository to clone spack from
-  SPACK_REPO: "https://github.com/spack/spack.git"
+  CI_SPACK_REPO: "https://github.com/spack/spack.git"
 # Ref (commit or branch) to checkout in spack
-  SPACK_REF: "c2af154cd24ab3ef501a7efc020f818ef60aa552"
+  CI_SPACK_REF: "c2af154cd24ab3ef501a7efc020f818ef60aa552"
