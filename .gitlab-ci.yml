@@ -14,7 +14,7 @@ include:
   - local: $CI_CONFIG_FILE
     rules:
       - if: $CI_CONFIG_FILE != null
-  - local: pipeline.yml
+  - local: .gitlab/pipeline.yml
     rules:
       - if: $CI_CONFIG_FILE != null
 

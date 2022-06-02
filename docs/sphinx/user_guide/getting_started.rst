@@ -62,10 +62,10 @@ should:
 * Make sure the configuration is working (see usage section).
 
 .. note::
-   It is mandatory that `CI_CONFIG_FILE` remains undefined on the main branch.
-   In facts, per our CI configuration, we impose that it be defined in GitLab
-   UI. In the UI, it is then possible to trigger or schedule pipelines with
-   define `CI_CONFIG_FILE` set to the path of the desired configuration.
+   It is mandatory that ``CI_CONFIG_FILE`` remains undefined on the main
+   branch. In facts, per our CI configuration, we impose that it be defined in
+   GitLab UI. In the UI, it is then possible to trigger or schedule pipelines
+   with define ``CI_CONFIG_FILE`` set to the path of the desired configuration.
 
 .. note::
    Only PRs originating from the GitHub repo can be mirrored on LC GitLab, no
@@ -79,17 +79,17 @@ Project configuration
 Configuration file
 ==================
 
-All the parameters are gathered in `configs/<config-name>.yml`.
+All the parameters are gathered in ``configs/<config-name>.yml``.
 
- ======================== ====================================================== ===========
+ ======================== ====================================================== ============
   Parameter                Description                                           Default
- ======================== ====================================================== ===========
+ ======================== ====================================================== ============
   ``LLNL_SERVICE_USER``    Service Account used in CI                             __none__
   ``CUSTOM_CI_BUILD_DIR``  Where to locate build directories (prevent overquota)  __none__
-  ``CI_SPACK_PATH``        Where to clone Spack, used to share a unique instance  `./spack`
+  ``CI_SPACK_PATH``        Where to clone Spack, used to share a unique instance  ``./spack``
   ``CI_SPACK_REPO``        Repository to clone Spack from                         __none__
   ``CI_SPACK_REF``         Reference (branch, commit) to clone in Spack history   __none__
- ======================== ====================================================== ===========
+ ======================== ====================================================== ============
 
 Important note about service accounts
 =====================================
@@ -118,17 +118,18 @@ Installing Clingo using your configuration
 ==========================================
 
 In order to effectively trigger the Clingo installation, one needs to set
-`CI_CONFIG_FILE` to point to the desired configuration. This can only be done
+``CI_CONFIG_FILE`` to point to the desired configuration. This can only be done
 in Gitlab UI.
 
 Triggering a pipeline manually
 ------------------------------
 
-To simply perform a one-time install, go to `CI-CD/Pipelines` and hit `Run
-pipeline`.  GitLab opens a page where you can pick the branch you would like to
-use, and specify variables for the pipeline: this is where you can set
-`CI_CONFIG_FILE` with your configuration. Hit `Run pipeline` and the pipeline
-starts immediately, effectively installing Clingo with your configuration.
+To simply perform a one-time install, go to ``CI-CD/Pipelines`` and hit ``Run
+pipeline``.  GitLab opens a page where you can pick the branch you would like
+to use, and specify variables for the pipeline: this is where you can set
+``CI_CONFIG_FILE`` with your configuration. Hit ``Run pipeline`` and the
+pipeline starts immediately, effectively installing Clingo with your
+configuration.
 
 Schedule a recurring pipeline
 -----------------------------
@@ -136,8 +137,8 @@ Schedule a recurring pipeline
 Another usage can be to test on a regular basis that Clingo keeps installing
 without errors with the latest Spack.
 
-First, we need a new configuration file with `CI_SPACK_REF` set to `develop`.
-Then we go to `CI-CD/Schedules` and define a new schedule. Pick a branch, set
-`CI_CONFIG_FILE` with the new configuration, and choose a recurrence using the
-cron syntax. Hit `Save pipeline schedule` and your pipeline will start at the
-next defined recurrence.
+First, we need a new configuration file with ``CI_SPACK_REF`` set to
+``develop``. Then we go to ``CI-CD/Schedules`` and define a new schedule. Pick
+a branch, set ``CI_CONFIG_FILE`` with the new configuration, and choose a
+recurrence using the cron syntax. Hit ``Save pipeline schedule`` and your
+pipeline will start at the next defined recurrence.
