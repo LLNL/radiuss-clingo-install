@@ -8,32 +8,36 @@
 .. _getting_started-label:
 
 *******************************************
-Getting started with Radiuss Clingo Install
+Getting started with Radiuss-Clingo-Install
 *******************************************
 
-Radiuss Clingo Install is a CI only repo. It consists in using GitLab CI
-capabilities to automate complex actions while allowing easy customization and
-user-friendly visual rendering in the UI.
+Radiuss-Clingo-Install is a CI only repo installing Clingo on LC systems for a
+given user. It leverages GitLab capabilities to automate complex actions while
+allowing easy customization and user-friendly visual rendering in the UI.
 
-Radiuss Clingo Install is meant to run on LC GitLab instance. The main repo,
+Radiuss-Clingo-Install is meant to run on LC GitLab instance. The main repo,
 hosted on GitHub for accessibility and visibility, is mirrored on LC GitLab for
-testing and/or running specific configs on demand.
+testing and/or running specific configurations on demand.
 
 No installation is required. Instead, one may either clone the project in their
 own LC Gitlab space, or create a specific branch in the original GitHub repo.
 
 .. note::
    We prefer that projects share their configuration by contributing to the
-   GitHub repo, but this is not mandatory.
+   GitHub repo but this is not mandatory.
 
-==============================
-Cloning Radiuss Clingo Install
+
+====================================
+Private clone or contribution branch
+====================================
+
+Cloning Radiuss-Clingo-Install
 ==============================
 
 Repository setup
-================
+----------------
 
-Radiuss Clingo Install is meant to run on LC Gitlab. Projects may choose to
+Radiuss-Clingo-Install is meant to run on LC Gitlab. Projects may choose to
 maintain their own clone. A simple pull and push clone from your local machine
 should suffice:
 
@@ -43,12 +47,11 @@ should suffice:
   $ git remote add gitlab ssh://git@czgitlab.llnl.gov:7999/<group>/radiuss-clingo-install.git
   $ git push gitlab
 
-==================================
 Create a branch in the GitHub repo
 ==================================
 
 Requirements
-============
+------------
 
 We welcome LLNL projects, in particular RADIUSS supported projects, to
 contribute their configuration directly to the GitHub repo. To do so, one
@@ -59,13 +62,15 @@ should:
 * Make sure the configuration is working (see usage section).
 
 .. note::
-   It is mandatory that `CI_CONFIG_FILE` default to "none" on the main branch.
-   In GitLab UI, it is then possible to trigger or schedule pipelines and
-   define `CI_CONFIG_FILE` to the path of the desired configuration.
+   It is mandatory that `CI_CONFIG_FILE` remains undefined on the main branch.
+   In facts, per our CI configuration, we impose that it be defined in GitLab
+   UI. In the UI, it is then possible to trigger or schedule pipelines with
+   define `CI_CONFIG_FILE` set to the path of the desired configuration.
 
 .. note::
    Only PRs originating from the GitHub repo can be mirrored on LC GitLab, no
    PR from forks can be tested. Please request write access.
+
 
 =====================
 Project configuration
@@ -84,13 +89,27 @@ All the parameters are gathered in `configs/<config-name>.yml`.
   ``CI_SPACK_PATH``        Where to clone Spack, used to share a unique instance  `./spack`
   ``CI_SPACK_REPO``        Repository to clone Spack from                         __none__
   ``CI_SPACK_REF``         Reference (branch, commit) to clone in Spack history   __none__
+ ======================== ====================================================== ===========
+
+Important note about service accounts
+=====================================
+
+We strongly recommend to manage Clingo install using a service account. In
+facts that is the only way to get the install working reliably for CI use of
+Spack.
+
+By default CLingo is installed in ``~/.spack/bootstrap/store``, in the user's
+home directory.  Using a service account to install Clingo and then that same
+service account to run Spack will ensure that Clingo is already installed
+whoever is asking for it.
+
 
 =====
 Usage
 =====
 
-The goal of this project is to install clingo on demand. We don't want to
-re-install clingo each time a commit is pushed to a branch.
+The goal of this project is to install Clingo on demand. We don't want to
+re-install Clingo each time a commit is pushed to a branch.
 
 We configured the CI so that by default GitLab will run a single job notifying
 the user that no configuration file was provided.
@@ -114,8 +133,8 @@ starts immediately, effectively installing Clingo with your configuration.
 Schedule a recurring pipeline
 -----------------------------
 
-Another usage can be to test that Clingo still installs without errors with the
-latest Spack.
+Another usage can be to test on a regular basis that Clingo keeps installing
+without errors with the latest Spack.
 
 First, we need a new configuration file with `CI_SPACK_REF` set to `develop`.
 Then we go to `CI-CD/Schedules` and define a new schedule. Pick a branch, set
