@@ -7,9 +7,9 @@
 
 variables:
   SPACK_PATH: "./spack"
-  CI_CONFIG_FILE: "configs/umpire.yml"
 
 # If a configuration file is given, the pipeline is included.
+# CI_CONFIG_FILE must be defined in the UI.
 include:
   - local: $CI_CONFIG_FILE
     rules:
