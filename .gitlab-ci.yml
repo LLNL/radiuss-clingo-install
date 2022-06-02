@@ -12,10 +12,10 @@ variables:
 include:
   - local: $CI_CONFIG_FILE
     rules:
-      - if: $CI_CONFIG_FILE != "none"
+      - if: $CI_CONFIG_FILE != null
   - local: pipeline.yml
     rules:
-      - if: $CI_CONFIG_FILE != "none"
+      - if: $CI_CONFIG_FILE != null
 
 # We only do one generation per stage because we found conflicts otherwise
 stages:
@@ -25,7 +25,7 @@ stages:
 no-config-name:
   tags: [shell, ruby]
   rules:
-    - if: $CI_CONFIG_FILE == "none"
+    - if: $CI_CONFIG_FILE == null
       when: always
     - when: never
   stage: setup
