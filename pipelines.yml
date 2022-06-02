@@ -16,9 +16,9 @@ clean-bootstrap:
   tags: [shell, ruby]
   stage: setup
   script:
-    - SPACK_PATH=${SPACK_PATH:-"./spack"}
+    - CI_SPACK_PATH=${CI_SPACK_PATH:-"./spack"}
     - scripts/get-spack
-    - . ${SPACK_PATH}/share/spack/setup-env.sh
+    - . ${CI_SPACK_PATH}/share/spack/setup-env.sh
     # Clean bootstrap
     - spack clean -b
 

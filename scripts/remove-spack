@@ -9,11 +9,9 @@
 
 set -e
 
-#[rm-spack--]
-if [[ ! -d ${SPACK_PARENT_DIR} ]]
+if [[ ! -d ${CI_SPACK_PATH}/.. ]]
 then
   echo "Spack directory not found"
 else
-  rm -rf ${SPACK_PARENT_DIR}
+  rm -rf ${CI_SPACK_PATH}/..
 fi
-#[--rm-spack]

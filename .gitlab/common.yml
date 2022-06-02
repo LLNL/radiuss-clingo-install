@@ -11,7 +11,7 @@
     - when: always
   script:
     - scripts/get-spack
-    - . ${SPACK_PATH}/share/spack/setup-env.sh
+    - . ${CI_SPACK_PATH}/share/spack/setup-env.sh
     - srun -N 1 -p pdebug spack -d spec zlib
 
 .build-job-lsf:
@@ -19,5 +19,5 @@
     - when: always
   script:
     - scripts/get-spack
-    - . ${SPACK_PATH}/share/spack/setup-env.sh
+    - . ${CI_SPACK_PATH}/share/spack/setup-env.sh
     - lalloc 1 spack -d spec zlib

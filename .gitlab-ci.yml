@@ -6,7 +6,7 @@
 ##############################################################################
 
 variables:
-  SPACK_PATH: "./spack"
+  CI_SPACK_PATH: "./spack"
 
 # If a configuration file is given, the pipeline is included.
 # CI_CONFIG_FILE must be defined in the UI.
@@ -31,6 +31,7 @@ no-config-name:
     - when: never
   stage: setup
   script:
-    - echo "Variable \"CONFIG_FILE\" was not set."
-    - echo "\"CONFIG_FILE\" is required and should point to a config directory."
+    - echo "Variable \"CI_CONFIG_FILE\" was not set."
+    - echo "\"CI_CONFIG_FILE\" is required and should point to a configuration file."
+    - echo "\"CI_CONFIG_FILE\" can only be defined in GitLab UI (see documentation)."
 
