@@ -31,7 +31,7 @@ no-config-name:
     - when: never
   stage: setup
   script:
-    - echo "Variable \"CI_CONFIG_FILE\" was not set."
-    - echo "\"CI_CONFIG_FILE\" is required and should point to a configuration file."
-    - echo "\"CI_CONFIG_FILE\" can only be defined in GitLab UI (see documentation)."
-
+    - |
+      echo -e "\e[31mVariable \"CI_CONFIG_FILE\" was not set.\e[0m"
+      echo -e "\e[31m\"CI_CONFIG_FILE\" is required and should point to a configuration file.\e[0m"
+      echo -e "\e[31m\"CI_CONFIG_FILE\" can only be defined in GitLab UI (see documentation).\e[0m"
