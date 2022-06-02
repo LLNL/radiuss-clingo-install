@@ -7,7 +7,7 @@
 
 variables:
   SPACK_PATH: "./spack"
-  CI_CONFIG_FILE: "toto"
+  CI_CONFIG_FILE: "umpire"
 
 # If a configuration file is given, the pipeline is included.
 include:
