@@ -26,4 +26,4 @@ demonstrate how to achieve both.
 
    getting_started
    project_configuration
-   CI_configuration
+   ci_configuration

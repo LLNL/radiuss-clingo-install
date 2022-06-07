@@ -22,4 +22,4 @@ This section of the documentation illustrates some of those technical details.
 .. toctree::
    :maxdepth: 2
 
-   CI_setup_explained
+   ci_setup_explained

@@ -5,7 +5,7 @@
 .. ## SPDX-License-Identifier: (MIT)
 .. ##
 
-.. _CI_setup_explained-label:
+.. _ci_setup_explained-label:
 
 **************************************
 Specificities of the CI implementation
