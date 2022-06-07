@@ -25,9 +25,9 @@ CI files
 The CI core file is ``.gitlab-ci.yml``. We use this file to handle the
 conditional inclusion of a *configuration file* and the *pipeline definiton*.
 
-We suggest that the *configuration file* path is supposed to match ``configs/<config-name>.yml``
-although there is no mechanism to enforce that. The ``configs`` directory is
-intended to users.
+We suggest that the *configuration file* path match
+``configs/<config-name>.yml`` although there is no mechanism to enforce that.
+The ``configs`` directory is intended to users.
 
 The ``Pipeline definition`` is described by the file ``.gitlab/pipeline.yml``
 and the associated sub-files, all located in ``.gitlab``. The ``.gitlab``
