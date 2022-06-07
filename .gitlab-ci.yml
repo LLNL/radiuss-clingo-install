@@ -23,7 +23,7 @@ stages:
   - setup
 
 # Run a simple job to display instructions when no config name was specified.
-no-config-name:
+no-config-file:
   tags: [shell, ruby]
   rules:
     - if: $CI_CONFIG_FILE == null
