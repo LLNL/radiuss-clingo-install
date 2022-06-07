@@ -23,9 +23,9 @@ CI files
 ========
 
 The CI core file is ``.gitlab-ci.yml``. We use this file to handle the
-conditional inclusion of a *configuration file* and the *pipeline definiton*.
+conditional inclusion of a **configuration file** and the **pipeline definiton**.
 
-We suggest that the *configuration file* path match
+We suggest that the **configuration file** path match
 ``configs/<config-name>.yml`` although there is no mechanism to enforce that.
 The ``configs`` directory is intended to users.
 
@@ -37,7 +37,7 @@ Other files
 =============
 
 The ``scripts`` directory gathers scripts. ``get-spack`` is used to clone Spack
-using the variables defined in the *configuration file*. ``print-variables`` is
+using the variables defined in the **configuration file**. ``print-variables`` is
 useful to print the CI variables of interest at the beginning of jobs.
 
 The documentation source code is in the ``docs`` directory, while ``cmake``
