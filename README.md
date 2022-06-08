@@ -10,7 +10,7 @@ testing infrastructure to test that clingo installs correctly on any LC machine
 of interest. It does so automatically in GitLab while tracking changes in
 Spack.
 
-Access the [documentation](https://radiuss-spack-testing.readthedocs.io/).
+Access the [documentation](https://radiuss-clingo-install.readthedocs.io/).
 
 ## Getting Started
 
@@ -24,7 +24,7 @@ This project requires no installation.
 
 ## Contributing
 
-Please read [CONTRIBUTING.md](https://github.com/LLNL/radiuss-spack-testing/CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
+Please read [CONTRIBUTING.md](https://github.com/LLNL/radiuss-clingo-install/CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
 
 ## Versioning
 
@@ -36,7 +36,7 @@ TODO: Not even sure how to handle versioning here.
 
 Adrien M Bernede
 
-See also the list of [contributors](https://github.com/LLNL/radiuss-spack-testing/contributors) who participated in this project.
+See also the list of [contributors](https://github.com/LLNL/radiuss-clingo-install/contributors) who participated in this project.
 
 ## License
 
@@ -45,9 +45,9 @@ file for details
 
 All new contributions must be made under the MIT License.
 
-See [LICENSE](https://github.com/LLNL/radiuss-spack-testing/blob/master/LICENSE),
-[COPYRIGHT](https://github.com/LLNL/radiuss-spack-testing/blob/master/COPYRIGHT), and
-[NOTICE](https://github.com/LLNL/radiuss-spack-testing/blob/master/NOTICE) for details.
+See [LICENSE](https://github.com/LLNL/radiuss-clingo-install/blob/master/LICENSE),
+[COPYRIGHT](https://github.com/LLNL/radiuss-clingo-install/blob/master/COPYRIGHT), and
+[NOTICE](https://github.com/LLNL/radiuss-clingo-install/blob/master/NOTICE) for details.
 
 SPDX-License-Identifier: (MIT)
 
